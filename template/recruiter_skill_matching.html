@@ -1,0 +1,15 @@
+{% extends "deshborad.html" %}
+
+{% block content %}
+  <h2>Matching Job Seekers for Your Desired Skills</h2>
+
+  {% if job_seekers %}
+    <ul>
+      {% for seeker in job_seekers %}
+        <li>{{ seeker.user.display_name }} - {{ seeker.user.email }}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No matching job seekers found.</p>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Matching Profiles for Job: {{ job.job_title }}</h2>
+
+    {% if matching_profiles %}
+        <ul class="list-group">
+            {% for profile in matching_profiles %}
+                <li class="list-group-item">{{ profile.display_name }} - {{ profile.email }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No matching profiles found.</p>
+    {% endif %}
+</div>
+{% endblock %}

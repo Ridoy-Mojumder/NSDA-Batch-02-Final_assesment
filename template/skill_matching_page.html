@@ -1,0 +1,22 @@
+
+{% extends "deshborad.html" %}
+
+{% block content %}
+  <h2>Skill Matching Page</h2>
+
+  {% if user.user_type == 'recruiter' %}
+    <h3>List of Job Seekers</h3>
+    <ul>
+      {% for job_seeker in job_seekers %}
+        <li>{{ job_seeker.user.display_name }} - {{ job_seeker.skills }}</li>
+      {% endfor %}
+    </ul>
+  {% elif user.user_type == 'jobseeker' %}
+    <h3>List of Jobs Matching Your Skills</h3>
+    <ul>
+      {% for job in job_matching_skills %}
+        <li>{{ job.job_title }} - {{ job.company_name }} - {{ job.Qualifications }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock %}

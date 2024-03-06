@@ -1,0 +1,170 @@
+{% extends "deshborad.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Password Page</title>
+    <!-- Add Bootstrap CSS link -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .profile-container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-picture {
+            max-width: 150px;
+            height: auto;
+            border-radius: 50%;
+            border: 5px solid #ffffff; /* White border for profile picture */
+        }
+
+        .profile-info {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .edit-profile-button {
+            margin-top: 15px;
+            margin-right: 10px;
+            font-size: 16px;
+        }
+
+        .action-buttons a,
+        .edit-profile-button {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .action-buttons a {
+            margin-top: 20px;
+        }
+
+        .edit-profile-button {
+            background-color: #332d14; /* Green */
+            color: #fff;
+        }
+
+        .edit-profile-button:hover {
+            background-color: #302d0e; /* Darker Green on hover */
+        }
+
+        .profile-info h2 {
+            margin-bottom: 15px;
+            color: #b66274; /* Blue */
+        }
+
+        .profile-info h6 {
+            color: #8294a3; /* Gray */
+            margin-bottom: 5px;
+        }
+
+        .profile-info p {
+            font-size: 16px;
+            color: #495057; /* Dark Gray */
+        }
+
+        .text-success {
+            color: #ecac77; /* Green */
+        }
+
+        .social-icons {
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            margin: 0 10px;
+            font-size: 24px;
+            color: #007bff; /* Blue */
+            text-decoration: none;
+        }
+
+        .social-icons a:hover {
+            color: #0056b3; /* Darker Blue on hover */
+        }
+    </style>
+</head>
+<body>
+
+
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="profile-container">
+            <div class="profile-header">
+                {% if user.user_type == 'recruiter' or user.user_type == 'jobseeker' or user.user_type == 'generaluser' or user.user_type == 'stuff' %}
+                    <img class="profile-picture img-fluid" src="/{{ request.user.Profile_picture }}" alt="Profile Picture">
+                {% endif %}
+
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.tags == 'success' %}
+                            <p class="text-success">{{ message }}</p>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+
+                <h1>{{ request.user.username }}</h1>
+                <p>{{ request.user.display_name }}</p>
+                <p>{{ request.user.email }}</p>
+                <a href="{% url 'EditprofilePage' %}" class="btn btn-primary edit-profile-button">Edit Profile</a>
+                <a href="{% url 'changepassPage' %}" class="btn btn-success edit-profile-button">Change Password</a>
+
+                {% if user.user_type == 'recruiter' %}
+                    <a href="{% url 'createdjobbyrecruiter' %}" class="btn btn-warning edit-profile-button">Created Job</a>
+                {% endif %}
+
+                {% if user.user_type == 'jobseeker' %}
+                    <a href="{% url 'createdresumebyjobseeker' %}" class="btn btn-warning edit-profile-button">Created Resume</a>
+                    {% if user.jobseekerprofile.resumes %}
+                        <a href="{{ request.user.jobseekerprofile.resumes.url }}" target="_blank"
+                           class="btn btn-warning edit-profile-button">View Resume</a>
+                    {% endif %}
+                {% endif %}
+            </div>
+
+            <div class="profile-info">
+                <h2>User Type: {{ request.user.user_type }}</h2>
+
+                {% if user.user_type == 'recruiter' %}
+                    <h6>Company Name: Bohubrihi</h6>
+                    <h6>Job Position: Django Developer</h6>
+                    <h6>Company Location: Mohakhali, Dhaka</h6>
+                    <h6>Company Description: {{ request.user.company_description }}</h6>
+                {% endif %}
+
+                {% if user.user_type == 'jobseeker' %}
+                    <h2>Skills:</h2>
+                    <p>{{ request.user.jobseekerprofile.skils }}</p>
+
+                    <h2>Resume:</h2>
+                    <p><a href="{{ request.user.jobseekerprofile.resumes.url }}" class="resume-link"
+                          target="_blank">View Resume</a></p>
+                {% endif %}
+            </div>
+        </div>
+    </form>
+    <div class="social-icons">
+        <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+    </div>
+
+</body>
+</html>
+
+{% endblock %}

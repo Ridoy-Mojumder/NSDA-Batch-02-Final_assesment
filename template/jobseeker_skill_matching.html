@@ -1,0 +1,17 @@
+{% extends "deshborad.html" %}
+
+
+
+{% block content %}
+  <h2>Matching Job Listings for Your Skills</h2>
+
+  {% if matching_jobs %}
+    <ul>
+      {% for job in matching_jobs %}
+        <li>{{ job.company_name }} - {{ job.job_title }}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No matching job listings found.</p>
+  {% endif %}
+{% endblock %}

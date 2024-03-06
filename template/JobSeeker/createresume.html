@@ -1,0 +1,15 @@
+{% extends "deshborad.html" %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mt-5">Submit Page</h1>
+    <form action="#" method="post" enctype="multipart/form-data" class="mt-4">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="resume">Resume:</label>
+            <input type="file" id="resume" name="resume" accept=".pdf, .doc, .docx" required class="form-control-file">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% endblock %}

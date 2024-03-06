@@ -1,0 +1,289 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f3f4f6; /* Light background color */
+        color: #1f2937; /* Dark text color */
+      }
+
+      header {
+        background-color: #2563eb; /* Primary color for header */
+        color: #fff; /* Light text color */
+        text-align: center;
+        padding: 1rem 0;
+      }
+
+      nav {
+        background-color: #1a202c; /* Dark background color for navbar */
+        overflow: hidden;
+      }
+
+      nav a {
+        float: left;
+        display: block;
+        color: #cbd5e0; /* Light text color */
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+      }
+
+      nav a:hover {
+        background-color: #2d3748; /* Darker color on hover */
+      }
+
+      .dropdown {
+        float: left;
+        overflow: hidden;
+      }
+
+      .dropdown .dropbtn {
+        font-weight: bold;
+        font-size: 16px;
+        border: none;
+        outline: none;
+        color: #cbd5e0; /* Light text color */
+        padding: 14px 16px;
+        background-color: inherit;
+        font-family: inherit;
+        margin: 0;
+        transition: background-color 0.3s;
+      }
+
+      .dropdown:hover .dropbtn {
+        background-color: #2d3748; /* Darker color on hover */
+      }
+
+      .nav-content {
+        display: none;
+        position: absolute;
+        background-color: #1a202c; /* Dark background color for dropdown */
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+      }
+
+      .nav-content a {
+        float: none;
+        color: #cbd5e0; /* Light text color */
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+        transition: background-color 0.3s;
+      }
+
+      .nav-content a:hover {
+        background-color: #2d3748; /* Darker color on hover */
+      }
+
+      .dropdown:hover .nav-content {
+        display: block;
+      }
+
+      .search {
+        text-align: center;
+        margin-top: 2rem;
+      }
+
+      .search h2 {
+        font-size: 24px;
+        margin-bottom: 1rem;
+        color: #2563eb; /* Primary color for emphasis */
+      }
+
+      .jumbotron {
+        background-color: #fff;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin: 2rem 0;
+      }
+
+      .jumbotron h1,
+      .jumbotron p,
+      .jumbotron a {
+        color: #333;
+      }
+
+      .jumbotron a {
+        background-color: #2563eb;
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+      }
+
+      .jumbotron a:hover {
+        background-color: #1a4b8d;
+      }
+
+      section {
+        padding: 2rem 0;
+      }
+
+      section h2 {
+        text-align: center;
+        margin-bottom: 2rem;
+        color: #333;
+      }
+
+      section p {
+        text-align: center;
+        color: #555;
+      }
+
+      .card {
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        margin-bottom: 2rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .card-img-top {
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        object-fit: cover;
+        height: 150px;
+      }
+
+      .card-body {
+        padding: 1.25rem;
+      }
+
+      .btn-primary {
+        background-color: #2563eb;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 10px 20px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+      }
+
+      .btn-primary:hover {
+        background-color: #1a4b8d;
+      }
+
+      form {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .form-row {
+        margin-bottom: 1rem;
+      }
+
+      .form-group {
+        text-align: left;
+      }
+
+      textarea {
+        resize: vertical;
+      }
+
+      footer {
+        text-align: center;
+        background-color: #333;
+        color: #fff;
+        padding: 1rem 0;
+      }
+    </style>
+  </head>
+  <body>
+    {% include "navbar.html" %}
+    {% csrf_token %}
+    {% block content %}
+
+    <div class="jumbotron text-center">
+      <h1 class="display-4">Welcome to Your Website</h1>
+      <p class="lead">A simple and clean homepage</p>
+      <hr class="my-4">
+      <p>Explore our services and learn more about us.</p>
+      <a class="btn btn-primary btn-lg" href="#" role="button">Get Started</a>
+    </div>
+
+    <!-- About Section -->
+    <section class="container">
+      <h2 class="text-center mb-4">About Us</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis nec justo fermentum malesuada.</p>
+    </section>
+
+    <!-- Services Section -->
+    <section class="container">
+      <h2 class="text-center mb-4">Our Services</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card">
+            <img src="https://via.placeholder.com/150" class="card-img-top" alt="Service 1">
+            <div class="card-body">
+              <h5 class="card-title">Service 1</h5>
+              <p class="card-text">Description of service 1.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <img src="https://via.placeholder.com/150" class="card-img-top" alt="Service 2">
+            <div class="card-body">
+              <h5 class="card-title">Service 2</h5>
+              <p class="card-text">Description of service 2.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <img src="https://via.placeholder.com/150" class="card-img-top" alt="Service 3">
+            <div class="card-body">
+              <h5 class="card-title">Service 3</h5>
+              <p class="card-text">Description of service 3.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="container">
+      <h2 class="text-center mb-4">Contact Us</h2>
+      <form>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Your Name">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="Your Email">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea class="form-control" id="message" rows="4" placeholder="Your Message"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </section>
+
+    <!-- Add Bootstrap JS scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    {% endblock %}
+  </body>
+</html>

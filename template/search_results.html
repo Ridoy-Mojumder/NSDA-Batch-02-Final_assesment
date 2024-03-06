@@ -1,0 +1,47 @@
+{% extends "deshborad.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Search Results for "{{ query }}"</h2>
+    <section class="job-listings">
+        {% if jobs %}
+            <ul class="list-group mt-4">
+                {% for i in jobs %}
+                    <li class="list-group-item mb-4">
+                        <h3>{{i.job_title}}</h3>
+                        <p><strong>Number of Openings:</strong> {{i.company_name}}</p>
+                        <p><strong>Category:</strong> {{i.location}}</p>
+                        <p><strong>Job Description:</strong> {{i.description}}</p>
+                        <p><strong>Company Description:</strong> {{i.company_description}}</p>
+                        <p><strong>Skills:</strong> {{i.Qualifications}}</p>
+                        <p><strong>Deadline:</strong> {{i.deadline}}</p>
+                        <p><strong>Created At:</strong> {{i.create_at}}</p>
+                        <p><strong>Updated At:</strong> {{i.update_time}}</p>
+
+                        <p><strong>Image:</strong></p>
+                        <img src="/{{i.Profile_Pic}}" class="img-fluid" alt="Job Image">
+
+                        {% if user.user_type == 'recruiter' %}
+                            <p><strong>Created By:</strong> {{i.job_creator}}</p>
+                            <p><strong>Created Time:</strong> {{i.create_at}}</p>
+                            <p><strong>Updated Time:</strong> {{i.update_time}}</p>
+                        {% endif %}
+                        {% if user.user_type == 'jobseeker' %}
+                            <a href="{% url 'applyPage' i.id %}" class="btn btn-success mt-3">Apply Now</a>
+                        {% endif %}
+                        {% if user.user_type == 'recruiter' %}
+                            <a href="{% url 'editPage' i.id %}" class="btn btn-warning mt-3">Edit</a>
+                            <a href="{% url 'deletePage' i.id %}" class="btn btn-danger mt-3">Delete</a>
+                        {% endif %}
+                        {% if user.user_type == 'generaluser' %}
+                            {# Any additional content for general users #}
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No matching jobs found.</p>
+        {% endif %}
+    </section>
+</div>
+{% endblock content %}

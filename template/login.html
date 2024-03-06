@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .login-container {
+            max-width: 400px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px orangered;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border-color: orangered;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <h2>Login</h2>
+    <form method="post" >
+        {% csrf_token %}
+        
+        <label for="username"><b>Username:</b></label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password"><b>Password:</b></label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit">Login</button>
+        <br><br>
+        <hr style="border-color: orangered;">
+        <br>
+        <a href="" style="color: orangered;">Forgot Password</a>
+        <br><br><br>
+        <a href="{% url 'singupPage' %}" style="color: orangered;">Sign Up in here</a>
+    </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+{% extends "deshborad.html" %}
+
+{% block content %}
+{% csrf_token %}
+
+<form action="" method="POST" enctype="multipart/form-data">
+    <div class="profile-container"> 
+        
+     
+        <div class="profile-info">               
+
+            <h2>Resume:</h2> 
+            <p>{{request.user.jobseekerprofile.resumes}}</p>
+            
+        </div> 
+    </div> 
+</form>
+
+
+{% endblock %}

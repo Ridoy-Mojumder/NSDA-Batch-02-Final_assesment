@@ -1,0 +1,56 @@
+{% extends "deshborad.html" %}
+
+{% block content %}
+<section class="job-listings container mt-5">
+    <h2 class="text-center mb-4">Latest Job Listings</h2>
+
+    <form method="get" action="{% url 'searchResultsPage' %}" class="mb-4">
+        <div class="form-group">
+            <label for="search_query">Search for Jobs:</label>
+            <div class="input-group">
+                <input type="text" class="form-control" id="search_query" name="search_query" placeholder="Enter keywords">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <ul class="list-unstyled">
+        <form method="post" enctype="multipart/form-data">
+            {% for i in job %}
+            <li class="mb-4">
+                <h3>{{i.job_title}}</h3>
+                <p>Number of openings: {{i.company_name}}</p>
+                <p>Category: {{i.location}}</p>
+                <p>Job Description: {{i.description}}</p>
+                <p>Company Description: {{i.company_description}}</p>
+                <p>Skills: {{i.Qualifications}}</p>
+                <p>Deadline: {{i.deadline}}</p>
+                <p>Create At: {{i.create_at}}</p>
+                <p>Update At: {{i.update_time}}</p>
+
+                <p>Image: </p>
+                <img src="/{{i.Profile_Pic}}" class="img-fluid" alt="Job Image">
+
+                {% if user.user_type == 'recruiter' %}
+                <p>Create By: {{i.job_creator}}</p>
+                <p>Create Time: {{i.create_at}}</p>
+                <p>Update Time: {{i.update_time}}</p>
+                {% endif %}
+                {% if user.user_type == 'jobseeker' %}
+                <a href="{% url 'applyPage' i.id %}" class="btn btn-success">Apply Now</a>
+                {% endif %}
+                {% if user.user_type == 'recruiter' %}
+                <a href="{% url 'editPage' i.id %}" class="btn btn-warning">Edit</a>
+                <a href="{% url 'deletePage' i.id %}" class="btn btn-danger">Delete</a>
+                {% endif %}
+                {% if user.user_type == 'generaluser' %}
+                {# Any additional content for general users #}
+                {% endif %}
+            </li>
+            {% endfor %}
+        </form>
+    </ul>
+</section>
+{% endblock %}
